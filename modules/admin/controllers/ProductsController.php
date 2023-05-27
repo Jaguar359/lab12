@@ -4,6 +4,7 @@ namespace app\modules\admin\controllers;
 
 use app\models\db\Products;
 use app\models\db\ProductsSearch;
+use app\models\Upload;
 use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
@@ -70,7 +71,10 @@ class ProductsController extends Controller
     {
         $model = new Products();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            $model->image = Upload::file($_FILES);
+            $model->save();
+
             return $this->redirect([
                 'view',
                 'id' => $model->id,
@@ -95,7 +99,15 @@ class ProductsController extends Controller
     {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post())) {
+            if (isset($_FILES) and count($_FILES) > 0) {
+                $model->image = Upload::file($_FILES);
+            } else {
+                $model->image = $model->oldAttributes['image'];
+            }
+
+            $model->save();
+
             return $this->redirect([
                 'view',
                 'id' => $model->id,
@@ -108,13 +120,12 @@ class ProductsController extends Controller
     }
 
     /**
-     * Deletes an existing Products model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param $id
      *
-     * @param integer $id
-     *
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
      */
     public function actionDelete($id)
     {

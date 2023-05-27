@@ -53,10 +53,13 @@ class Products extends \yii\db\ActiveRecord
             [
                 [
                     'name',
-                    'image',
                 ],
                 'string',
                 'max' => 255,
+            ],
+            [
+                ['image',],
+                'file',
             ],
         ];
     }

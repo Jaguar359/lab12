@@ -10,14 +10,14 @@ use yii\widgets\ActiveForm;
 
 <div class="products-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([]); ?>
 
     <div class="row">
         <div class="col-md-3">
-            <?=$form->field($model, 'name')->textInput(['maxlength' => true])?>
+            <?=$form->field($model, 'name')->textInput(['maxlength' => true]) ?>
         </div>
         <div class="col-md-3">
-            <?=$form->field($model, 'price')->textInput()?>
+            <?=$form->field($model, 'price')->input('number')?>
         </div>
         <div class="col-md-3">
             <?=$form->field($model, 'views')->textInput()?>

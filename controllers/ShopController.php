@@ -9,6 +9,8 @@ class ShopController extends Controller
 {
     public function actionIndex()
     {
+        $this->layout = 'products-all';
+
         $products = Products::find()->asArray()->all();
 
         return $this->render('index', [

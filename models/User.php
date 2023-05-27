@@ -384,6 +384,7 @@ class User extends ActiveRecord implements IdentityInterface
     public static function getUserNameById($id)
     {
         $user = self::find()->where(['id' => $id])->asArray()->one();
+
         return $user['surname'] . ' ' . $user['first_name'];
     }
 }

@@ -11,6 +11,11 @@ class TestController extends Controller
 
     public function actionIndex()
     {
+
+        var_dump(mail('bacs21of@mail.ru', 'test', 'test ok'));
+        exit;
+
+
         $i   = 0;
         $max = 100;
 

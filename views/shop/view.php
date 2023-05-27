@@ -161,14 +161,6 @@
                                 <p class="p-bottom-30">
                                     <?php echo nl2br($product['description']); ?>
                                 </p>
-
-
-                                <?php
-                                echo '<pre>';
-                                var_dump($_SESSION['cart']);
-                                echo '</pre>';
-                                ?>
-
                             </div>
                         </div><!-- ends: .tab-content -->
                         <div class="fade tab-pane product-tab" id="product-comment" role="tabpanel"
