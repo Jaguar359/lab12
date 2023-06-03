@@ -38,4 +38,10 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <?php
+    if (!empty($model->image)){
+        echo "<img src='{$model->image}' style='width: 30%;'>"; //::src1
+    }
+    ?>
+
 </div>

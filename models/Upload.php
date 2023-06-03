@@ -8,6 +8,8 @@ class Upload
 {
     /**
      * @param $files
+     *
+     * @return string
      */
     public static function file($files)
     {

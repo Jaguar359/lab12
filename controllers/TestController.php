@@ -11,10 +11,10 @@ class TestController extends Controller
 
     public function actionIndex()
     {
+        echo '<pre>';
+        var_dump(unserialize(serialize($_SESSION["cart"])));
 
-        var_dump(mail('bacs21of@mail.ru', 'test', 'test ok'));
         exit;
-
 
         $i   = 0;
         $max = 100;
@@ -23,7 +23,8 @@ class TestController extends Controller
             $product              = new Products;
             $product->name        = "Тестовый товар #{$i}";
             $product->image       = 'https://tehnoteca.ru/img/1693/1692695/acer_nitro_7_an715_51_an715_51_78cl_3.jpg';
-            $product->description = 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cum delectus, esse eveniet nihil quaerat quidem rerum tempora veniam voluptatem! Cupiditate ducimus facilis fugiat harum modi officia praesentium ratione vel?';
+            $product->description =
+                'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam cum delectus, esse eveniet nihil quaerat quidem rerum tempora veniam voluptatem! Cupiditate ducimus facilis fugiat harum modi officia praesentium ratione vel?';
             $product->price       = rand(1000, 9999);
             $product->views       = rand(50, 500);
             $product->rating      = rand(50, 500);
@@ -31,5 +32,10 @@ class TestController extends Controller
 
             $i++;
         }
+    }
+
+    public function actionTest()
+    {
+        return $this->render('test');
     }
 }

@@ -52,16 +52,16 @@ class AjaxController extends Controller
         }
 
         // если ошибок нет - регистрируем
-        $new_user                     = new User;
-        $new_user->email              = $login;
-        $new_user->password_hash      = md5($pass);
-        $rand_auth_key                = md5(rand(100, 99999));
-        $new_user->auth_key           = $rand_auth_key;
-        $new_user->status             = '10'; // 5 - зарегистрирован, но не подтвержден. 10 - подтвержден, активен
-        $new_user->city               = '2';
-        $new_user->created_at         = '1';
-        $new_user->updated_at         = '1';
-        $new_user->type               = '1';
+        $new_user                = new User;
+        $new_user->email         = $login;
+        $new_user->password_hash = md5($pass);
+        $rand_auth_key           = md5(rand(100, 99999));
+        $new_user->auth_key      = $rand_auth_key;
+        $new_user->status        = '10'; // 5 - зарегистрирован, но не подтвержден. 10 - подтвержден, активен
+        $new_user->city          = '2';
+        $new_user->created_at    = '1';
+        $new_user->updated_at    = '1';
+        $new_user->type          = '1';
 
         if ($new_user->save()) {
             return true;
