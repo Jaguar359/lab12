@@ -6,6 +6,13 @@ use app\models\db\Products;
 
 class Cart extends CartModel
 {
+    public function __construct()
+    {
+        if (!isset($_SESSION["__flash"])){
+            session_start();
+        }
+    }
+
     public static function add($id)
     {
         /** @var Products $product */

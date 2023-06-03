@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Cart;
 use app\models\db\OrdersHistory;
+use app\models\db\Products;
 use Yii;
 use yii\web\Controller;
 
@@ -41,7 +42,7 @@ class CartController extends Controller
     public function actionAdd()
     {
         $id = htmlspecialchars($_GET['id']);
-        var_dump(Cart::add($id));
+        Cart::add($id);
 
         return true;
     }

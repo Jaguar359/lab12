@@ -98,6 +98,7 @@
         var btn = $(this);
 
         $.get("index.php?r=cart/add", {id}, function(res) {
+            console.log(res);
             if (res == 1){
                 $(btn).css('background-color', 'green');
             }
