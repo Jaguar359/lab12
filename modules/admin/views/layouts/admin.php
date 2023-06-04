@@ -20,6 +20,9 @@ AppAsset::register($this);
         <meta charset="<?= Yii::$app->charset ?>">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+        <script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-jquery@1/dist/tinymce-jquery.min.js"></script>
         <?php $this->registerCsrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
@@ -41,7 +44,8 @@ AppAsset::register($this);
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items'   => [
-                ['label' => 'В начало', 'url' => ['/admin/']],
+                ['label' => 'Товар', 'url' => ['/admin/products']],
+                ['label' => 'Посты', 'url' => ['/admin/posts']],
             ],
         ]);
         NavBar::end();
@@ -63,6 +67,24 @@ AppAsset::register($this);
         </div>
     </footer>
 
+    <script>
+        $('textarea#tiny').tinymce({
+            height: 500,
+            menubar: false,
+            plugins: [
+                'a11ychecker','advlist','advcode','advtable','autolink','checklist','export',
+                'lists','link','image','charmap','preview','anchor','searchreplace','visualblocks',
+                'powerpaste','fullscreen','formatpainter','insertdatetime','media','table','help','wordcount'
+            ],
+            toolbar: 'undo redo | a11ycheck casechange blocks | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist checklist outdent indent | removeformat | code table help'
+        });
+    </script>
+
+    <script>
+        setInterval(function() {
+            $('.tox-notifications-container').hide();
+        }, 10);
+    </script>
     <?php $this->endBody() ?>
     </body>
     </html>

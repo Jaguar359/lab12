@@ -1,25 +1,13 @@
-<?php
-
-use yii\helpers\Html;
-
-if (!isset($_GET['id'])){
-    $_GET['id'] = 0;
-}
-
-?>
 <!doctype HTML>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="DigiPro - Digital Products Marketplace ">
     <meta name="keywords" content="marketplace, easy digital download, digital product, digital, html5">
-    <title><?=Html::encode($this->title)?></title>
+    <title>DigiPro - Digital Products Marketplace</title>
     <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,500,600" rel="stylesheet">
-
     <link rel="stylesheet" href="vendor_assets/css/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="vendor_assets/css/animate.css">
     <link rel="stylesheet" href="vendor_assets/css/font-awesome.min.css">
@@ -33,11 +21,8 @@ if (!isset($_GET['id'])){
     <link rel="stylesheet" href="vendor_assets/css/trumbowyg.min.css">
     <link rel="stylesheet" href="vendor_assets/css/venobox.css">
     <link rel="stylesheet" href="style.css">
-
-
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-32x32.png">
 </head>
-
 <body class="preload">
 <?php echo $this->render('_parts/_header'); ?>
 <section class="breadcrumb-area">
@@ -45,14 +30,14 @@ if (!isset($_GET['id'])){
         <div class="row">
             <div class="col-md-12">
                 <div class="breadcrumb-contents">
-                    <h2 class="page-title">DigiPro Multipurpose Marketplace HTML Template</h2>
+                    <h2 class="page-title">Корзина</h2>
                     <div class="breadcrumb">
                         <ul>
                             <li>
-                                <a href="#">Home</a>
+                                <a href="#">Магаз</a>
                             </li>
                             <li class="active">
-                                <a href="#">Single Product</a>
+                                <a href="#">Корзина</a>
                             </li>
                         </ul>
                     </div>
@@ -62,11 +47,18 @@ if (!isset($_GET['id'])){
     </div>
 </section>
 
-<?php echo $content; ?>
+<section class="login_area section--padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <?php echo $content; ?>
+            </div>
+        </div>
+    </div>
+</section>
 
 <?php echo $this->render('_parts/_footer'); ?>
 <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDxflHHc5FlDVI-J71pO7hM1QJNW1dRp4U"></script>
-
 <script src="vendor_assets/js/jquery/jquery-1.12.4.min.js"></script>
 <script src="vendor_assets/js/jquery/uikit.min.js"></script>
 <script src="vendor_assets/js/bootstrap/popper.js"></script>
@@ -89,7 +81,6 @@ if (!isset($_GET['id'])){
 <script src="theme_assets/js/dashboard.js"></script>
 <script src="theme_assets/js/main.js"></script>
 <script src="theme_assets/js/map.js"></script>
-
 <script>
     function getQty() {
         $.get("index.php?r=cart/get-qty", {}, function (res) {
@@ -97,41 +88,24 @@ if (!isset($_GET['id'])){
         });
     }
 
-    $(".add-to-cart").click(function () {
-        var id = $(this).data('id');
-        var btn = $(this);
+    getQty();
 
-        $.get("index.php?r=cart/add", {id}, function (res) {
-            console.log(res);
+    $(".delete").click(function () {
+        var id = $(this).data('id');
+
+        $.get("index.php?r=cart/delete", {id}, function (res) {
             if (res == 1) {
-                $(btn).css('background-color', 'green');
+                window.location.reload();
             }
         });
-
-        getQty();
     });
 
-    getQty();
-</script>
-<script>
-    function refreshComments() {
-        var id = <?=htmlspecialchars($_GET['id'])?>;
+    $(document).on('change', '.change-qty', function (e) {
+        var id = $(this).data('id');
+        var val = $(this).val();
 
-        $.get("index.php?r=post/get-comments", {id}, function (res) {
-            $('.comment-area').html(res);
-        });
-    }
-
-    refreshComments();
-
-    /** ф-ция добавления коммента */
-    $(".send-comment").click(function () {
-        var id = <?=htmlspecialchars($_GET['id'])?>;
-        var comment = $('.t-comment').val();
-
-        $.get("index.php?r=post/add-comment", {id, comment}, function (res) {
-            refreshComments();
-            $('.t-comment').val('');
+        $.get("index.php?r=cart/change-qty", {id, val}, function (res) {
+            $('.result-html').html(res);
         });
     });
 </script>

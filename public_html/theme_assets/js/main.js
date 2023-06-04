@@ -1,9 +1,3 @@
-/*
-    Name: Digipro - Digital Products Marketplace
-    Author: AazzTech
-    Version: 1.0
-*/
-
 (function () {
     "use strict";
 

@@ -39,7 +39,6 @@ use yii\web\IdentityInterface;
  * @property int         $mail_free             Рассылок осталось
  * @property string      $second_mail
  * @property string|null $first_name
- * @property string|null $surname
  * @property string|null $middle_name
  * @property string|null $more
  * @property string|null $phone_company
@@ -375,7 +374,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Получение имени и фамилии пользователя по его id
+     * Получение имени пользователя по его id
      *
      * @param $id
      *
@@ -383,8 +382,6 @@ class User extends ActiveRecord implements IdentityInterface
      */
     public static function getUserNameById($id)
     {
-        $user = self::find()->where(['id' => $id])->asArray()->one();
-
-        return $user['surname'] . ' ' . $user['first_name'];
+        return self::find()->where(['id' => $id])->asArray()->one()['email'];
     }
 }

@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\db\Posts;
+use app\models\db\PostsComments;
 use yii\web\Controller;
 
 /**
@@ -19,7 +21,11 @@ class PostController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $posts = Posts::find()->asArray()->all();
+
+        return $this->render('index', [
+            'posts' => $posts,
+        ]);
     }
 
     /**
@@ -29,6 +35,40 @@ class PostController extends Controller
      */
     public function actionView()
     {
-        return $this->render('view');
+        $id   = htmlspecialchars($_GET['id']);
+        $post = Posts::find()->where(['id' => $id])->one();
+
+        return $this->render('view', [
+            'post' => $post,
+        ]);
+    }
+
+    public function actionGetComments()
+    {
+        $this->layout = false;
+        $id           = htmlspecialchars($_GET['id']);
+        $comments     = PostsComments::find()->where(['post_id' => $id])->asArray()->all();
+        $result_html  = "";
+
+        foreach ($comments as $comment) {
+            $result_html .= $this->render('_comment', ['comment' => $comment]);
+        }
+
+        return $result_html;
+    }
+
+    public function actionAddComment()
+    {
+        $id      = htmlspecialchars($_GET['id']);
+        $comment = htmlspecialchars($_GET['comment']);
+
+        $new_comment           = new PostsComments;
+        $new_comment->user_id  = 1;
+        $new_comment->datetime = time();
+        $new_comment->comment  = $comment;
+        $new_comment->post_id  = $id;
+        $new_comment->save();
+
+        return true;
     }
 }
