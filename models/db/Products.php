@@ -12,6 +12,10 @@ namespace app\models\db;
  * @property int         $price
  * @property int         $views
  * @property int         $rating
+ * @property string      $param1
+ * @property string      $param2
+ * @property string      $param3
+ * @property string      $params
  */
 class Products extends \yii\db\ActiveRecord
 {
@@ -39,7 +43,13 @@ class Products extends \yii\db\ActiveRecord
                 'required',
             ],
             [
-                ['description'],
+                [
+                    'description',
+                    'param1',
+                    'param2',
+                    'param3',
+                    'params',
+                ],
                 'string',
             ],
             [

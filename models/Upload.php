@@ -14,7 +14,13 @@ class Upload
     public static function file($files)
     {
         $upload_dir = 'uploads';
-        $user_dir   = Yii::$app->user->id;
+
+        if (Yii::$app->user->isGuest){
+            $user_dir = 'guest';
+        } else {
+            $user_dir   = Yii::$app->user->id;
+        }
+
         $final_dir  = "{$upload_dir}/{$user_dir}";
 
         if (!is_dir($final_dir)) {

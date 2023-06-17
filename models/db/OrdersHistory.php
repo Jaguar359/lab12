@@ -48,7 +48,7 @@ class OrdersHistory extends \yii\db\ActiveRecord
                 'integer',
             ],
             [
-                ['order_list'],
+                ['order_list', 'order_num'],
                 'string',
             ],
         ];

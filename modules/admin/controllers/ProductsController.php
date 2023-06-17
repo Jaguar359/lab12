@@ -17,6 +17,13 @@ class ProductsController extends Controller
 {
     public $layout = 'admin';
 
+    public function beforeAction($action)
+    {
+        $this->enableCsrfValidation = false;
+
+        return parent::beforeAction($action);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -105,6 +112,12 @@ class ProductsController extends Controller
             } else {
                 $model->image = $model->oldAttributes['image'];
             }
+
+            $params['param1'] = $model->param1;
+            $params['param2'] = $model->param2;
+            $params['param3'] = $model->param3;
+
+            $model->params = serialize($params);
 
             $model->save();
 

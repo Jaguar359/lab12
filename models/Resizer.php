@@ -7,10 +7,11 @@ class Resizer
     /**
      * @param $file
      */
-    private static function thumbCreate($file)
+    public static function thumbCreate($file)
     {
         $source_properties = getimagesize($file);
         $image_type        = $source_properties[2];
+
         if ($image_type == IMAGETYPE_JPEG) {
             $image_resource_id = imagecreatefromjpeg($file);
             $target_layer      = self::fn_resize($image_resource_id, $source_properties[0], $source_properties[1]);
@@ -33,7 +34,7 @@ class Resizer
      *
      * @return false|resource
      */
-    private static function fn_resize($image_resource_id, $width, $height)
+    public static function fn_resize($image_resource_id, $width, $height)
     {
         $target_width  = 400;
         $target_height = 400;

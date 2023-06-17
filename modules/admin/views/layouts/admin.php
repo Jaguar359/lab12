@@ -46,6 +46,7 @@ AppAsset::register($this);
             'items'   => [
                 ['label' => 'Товар', 'url' => ['/admin/products']],
                 ['label' => 'Посты', 'url' => ['/admin/posts']],
+                ['label' => 'Заказы', 'url' => ['/admin/orders']],
             ],
         ]);
         NavBar::end();

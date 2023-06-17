@@ -161,6 +161,18 @@
                                 <p class="p-bottom-30">
                                     <?php echo nl2br($product['description']); ?>
                                 </p>
+
+                                <?php
+
+                                $params = $product['params'];
+                                $params = unserialize($params);
+
+                                if (is_array($params)){
+                                    foreach ($params as $param_name => $param_value) {
+                                        echo "{$param_name}: {$param_value}<br>";
+                                    }
+                                }
+                                ?>
                             </div>
                         </div><!-- ends: .tab-content -->
                         <div class="fade tab-pane product-tab" id="product-comment" role="tabpanel"
@@ -1249,7 +1261,8 @@
                             <a href="#" class="btn btn--lg btn-primary" data-toggle="modal" data-target="#add-to-cart">
                                 Быстрая покупка
                             </a>
-                            <a href="#!" class="btn btn--lg cart-btn btn-secondary add-to-cart" data-id="<?=$_GET['id']?>">
+                            <a href="#!" class="btn btn--lg cart-btn btn-secondary add-to-cart"
+                               data-id="<?=$_GET['id']?>">
                                 <span class="icon-basket"></span>
                                 Добавить в корзину
                             </a>

@@ -4,7 +4,6 @@ namespace app\controllers;
 
 use app\models\Cart;
 use app\models\db\OrdersHistory;
-use Yii;
 use yii\web\Controller;
 
 class CartController extends Controller
@@ -20,29 +19,64 @@ class CartController extends Controller
 
     public function actionSendOrder()
     {
-        // подготавливаем переменные
-        $cart       = $_SESSION["cart"];
-        $result_sum = 0;
-        $result_qty = 0;
+        // если существует $_SESSION['cart'] и она является массивом:
+        if (isset($_SESSION['cart']) && is_array($_SESSION['cart'])) {
+            // сформировать заказ
+            $sum      = 0;
+            $products = $_SESSION['cart'];
 
-        // суммируем кол-во и сумму
-        foreach ($cart as $item) {
-            $result_qty += $item['qty'];
-            $result_sum += $item['price'];
+            foreach ($products as $product) {
+                $sum += $product['price'] * $product['qty'];
+            }
+
+            if (\Yii::$app->user->isGuest) {
+                $user_id = 0;
+            } else {
+                $user_id     = \Yii::$app->user->id;
+                $client_mail = \Yii::$app->user->identity->email;
+                $client_name = \Yii::$app->user->identity->username;
+            }
+
+            // сохранить заказ
+            $order_num_date = date('dm');
+            $order_num_rand = rand(1000, 9999);
+
+            $new_order             = new OrdersHistory;
+            $new_order->user_id    = $user_id;
+            $new_order->sum        = $sum;
+            $new_order->datetime   = time();
+            $new_order->order_list = serialize($products);
+            $new_order->status     = 1;
+            $new_order->order_num  = "{$order_num_date}-{$order_num_rand}";
+            $new_order->save();
+
+            // отправить письмо клиенту
+            if ($user_id != 0) {
+                //self::sendMailToClient($client_name, $client_mail, serialize($products));
+            }
+
+            // отправить письмо админу
+            //self::sendMailToAdmin(serialize($products));
+
+            // чистим корзину
+            unset($_SESSION['cart']);
+
+            return $this->render('send-order');
         }
+    }
 
-        // подготавливаем массив для базы
-        $order             = new OrdersHistory;
-        $order->user_id    = Yii::$app->user->id;
-        $order->sum        = $result_sum;
-        $order->datetime   = time();
-        $order->order_list = serialize($cart);
-        $order->status     = 1;
+    private static function sendMailToAdmin($serialized_products)
+    {
+        $message = "С магазина пришел заказ\n{$serialized_products}";
 
-        // сохраняем
-        if ($order->save()) {
-            echo 'все ок';
-        };
+        mail("admin@mail.ru", "Заказ с сайта", $message);
+    }
+
+    private static function sendMailToClient($client_name, $client_mail, $serialized_products)
+    {
+        $message = "Вы заказали \n{$serialized_products}";
+
+        mail($client_mail, "Заказ с сайта", $message);
     }
 
     public function actionAdd()

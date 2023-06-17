@@ -31,6 +31,21 @@ use yii\widgets\ActiveForm;
 
     <?=$form->field($model, 'description')->textarea(['rows' => 6])?>
 
+    <div class="row">
+        <div class="col-md-4">
+            <?=$form->field($model, 'param1')?>
+        </div>
+        <div class="col-md-4">
+            <?=$form->field($model, 'param2')?>
+        </div>
+        <div class="col-md-4">
+            <?=$form->field($model, 'param3')?>
+        </div>
+        <div class="col-md-12">
+            <?=$form->field($model, 'params')?>
+        </div>
+    </div>
+
     <div class="form-group">
         <?=Html::submitButton('Сохранить', ['class' => 'btn btn-success'])?>
     </div>

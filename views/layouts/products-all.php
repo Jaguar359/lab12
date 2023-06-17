@@ -126,6 +126,27 @@ AppAsset::register($this);
     <script src="theme_assets/js/dashboard.js"></script>
     <script src="theme_assets/js/main.js"></script>
     <script src="theme_assets/js/map.js"></script>
+    <script>
+        function filter()
+        {
+            var param1 = $('.f-param1').val();
+            var param2 = $('.f-param2').val();
+            var param3 = $('.f-param3').val();
+            var search = $('.f-search').val();
+
+            $.get("index.php?r=shop/filters", {param1, param2, param3, search}, function(res) {
+                $('.result-html').html(res);
+            });
+        }
+
+        $(".form-control").change(function(){
+            filter();
+        });
+
+        $(".form-control").keyup(function(){
+            filter();
+        });
+    </script>
     <?php $this->endBody() ?>
     </body>
     </html>
