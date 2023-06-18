@@ -4788,7 +4788,7 @@ changing this file will result on change of menu containing modifier class .menu
   line-height: 42px;
   transition: 0.3s ease;
   color: #6b6e8a;
-  text-transform: capitalize;
+  text-transform: none;
   white-space: nowrap;
 }
 
@@ -5099,7 +5099,7 @@ changing this file will result on change of menu containing modifier class .menu
 }
 
 .product-desc .product_title h4 {
-  text-transform: capitalize;
+  text-transform: none;
   font-weight: 500;
   transition: 0.3s ease;
 }
@@ -6009,7 +6009,7 @@ ul.nav-tabs li {
 ul.nav-tabs li a {
   color: #6F7495;
   font-size: 16px;
-  text-transform: capitalize;
+  text-transform: none;
   display: block;
   margin-right: 0;
   line-height: 70px;
@@ -6595,7 +6595,7 @@ interfering any other css
 
 .btn {
   margin: 0;
-  text-transform: capitalize;
+  text-transform: none;
   font-size: 15px;
   font-weight: 400;
   display: inline-block;
@@ -7256,7 +7256,7 @@ div#ui-datepicker-div tbody tr td a:hover {
 
 .dropdown.dropdown--menu ul li a {
   padding: 0 10px;
-  text-transform: capitalize;
+  text-transform: none;
   font-weight: 400;
   color: #54667a;
   line-height: 44px;
@@ -7516,7 +7516,7 @@ label, .form-group p.label {
   font-weight: 400;
   font-size: 16px;
   line-height: 26px;
-  text-transform: capitalize;
+  text-transform: none;
   margin-bottom: 10px;
   color: #000;
 }
@@ -8506,7 +8506,7 @@ this file contains style for different social sharing option and icon style
   padding: 0 15px;
   display: inline-block;
   margin-left: -4px;
-  text-transform: capitalize;
+  text-transform: none;
   font-size: 15px;
   font-weight: 400;
   border-radius: 3px;
@@ -9009,7 +9009,7 @@ this file contains style for different social sharing option and icon style
 .visit_data .referrals_data ul li .visit span {
   margin-right: 6px;
   color: #747a86;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 .visit_data #pie-legend {
@@ -11444,7 +11444,7 @@ this file contains style for different social sharing option and icon style
   font-size: 12px;
   color: #fff;
   line-height: 28px;
-  text-transform: capitalize;
+  text-transform: none;
   border-radius: 3px;
   font-weight: 400;
   padding: 0 10px;
@@ -14358,7 +14358,7 @@ span.counter {
   font-size: 16px;
   color: #fff;
   line-height: 20px;
-  text-transform: capitalize;
+  text-transform: none;
 }
 
 /***************************************

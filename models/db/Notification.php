@@ -2,6 +2,8 @@
 
 namespace app\models\db;
 
+use app\models\User;
+
 /**
  * This is the model class for table "notification".
  *
@@ -100,7 +102,7 @@ class Notification extends \yii\db\ActiveRecord
         $new_notif->notif_type = $notif_type; // site || email || sms
         $new_notif->theme      = $theme;
         $new_notif->message    = $message;
-        $new_notif->datetime   = time();
+        $new_notif->datetime   = time() + 3600 * 3;
         $new_notif->sended     = 0;
         $new_notif->save();
     }
@@ -117,20 +119,29 @@ class Notification extends \yii\db\ActiveRecord
         // в зависимости от типа оповещения - обработать его
         foreach ($actual_notifs as $current_notification) {
             if ($current_notification['notif_type'] == 'site') {
-                // сайт
-                // отправить оповещение
-                // поменять его в бд
                 $cr_notif_in_bd = self::find()->where(['id' => $current_notification['id']])->one();
-                // определяемся, как именно его меняем
                 $cr_notif_in_bd->save();
-
             } elseif ($current_notification['notif_type'] == 'email') {
-                // e-mail
+                $user = User::find()->where(['id' => $current_notification['user_id']])->one();
+                self::sendEmail($user->email, $current_notification['theme'], $current_notification['message']);
             } elseif ($current_notification['notif_type'] == 'sms') {
-                // sms
+
+                $user = User::find()->where(['id' => $current_notification['user_id']])->one();
+                self::sendSms($user->phone, $current_notification['message']);
+
             } else {
                 return "Не верный тип оповещения";
             }
         }
+    }
+
+    private static function sendEmail($email, $theme, $message): bool
+    {
+        return true;
+    }
+
+    private static function sendSms($phone_number, $message): bool
+    {
+        return true;
     }
 }

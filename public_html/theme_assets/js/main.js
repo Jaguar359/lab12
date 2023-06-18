@@ -522,6 +522,12 @@
         mainClass: 'mfp-fade'
     });
 
+    $('.check-notification').on('click', function () {
+
+        $.get("index.php?r=system/check-notification", {}, function (res) {
+            $('.notifications_module').html('<div style="padding: 10px 25px">Оповещений нет</div>');
+        });
+    });
 })();
 
 

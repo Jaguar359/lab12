@@ -394,7 +394,7 @@ changing this file will result on change of menu containing modifier class .menu
     line-height: 42px;
     transition: $transition;
     color: $text-color;
-    text-transform: capitalize;
+    text-transform: none;
     white-space: nowrap;
   }
 }
