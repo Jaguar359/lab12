@@ -3,6 +3,36 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12">
+                <style>
+                    .form-control{
+                        border: 1px solid black !important;
+                    }
+                </style>
+
+                <form id="send-money-form">
+                    <label>Валюта</label>
+                    <select class="form-control currency">
+                        <option value="1">Тунгрики</option>
+                    </select>
+                    <br>
+                    <label>Сумма</label>
+                    <input type="text" class="form-control sum">
+                    <br>
+                    <label>Номер кошелька</label>
+                    <input type="text" class="form-control cb-num">
+                    <input type="submit" class="send-money-btn" value="Отправить">
+                </form>
+
+                <?php
+                $cb_data = \app\models\db\Cashbox::find()->asArray()->all();
+                echo '<pre>';
+                var_dump($cb_data);
+                echo '</pre>';
+                ?>
+
+            </div>
+
+            <div class="col-lg-8 col-md-12">
                 <div class="dashboard_module recent_sells">
                     <div class="dashboard__title">
                         <h4>Recent Items Sales</h4>

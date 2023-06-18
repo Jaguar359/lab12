@@ -14,10 +14,11 @@ abstract class PaymentModel
     /**
      * Отправка платежа
      *
-     * @param $from
+     * @param $cb_num
      * @param $user_id
+     * @param $sum
      *
      * @return mixed
      */
-    abstract public function send($from, $user_id);
+    abstract public function send($cb_num, $user_id, $sum);
 }
